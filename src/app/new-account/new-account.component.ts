@@ -9,7 +9,11 @@ import { AccountService } from '../shared/account.service';
   // providers: [LoggingService]
 })
 export class NewAccountComponent {
-  constructor(private loggingService: LoggingService, private accountsService: AccountService ) {}
+  constructor(private loggingService: LoggingService, private accountsService: AccountService ) {
+    this.accountsService.statusUpdated.subscribe(
+      (status: string) => alert("New Status: " + status)
+    );
+  }
 
   onCreateAccount(accountName: string, accountStatus: string) {
     this.accountsService.addAccount(accountName, accountStatus);
@@ -17,5 +21,6 @@ export class NewAccountComponent {
     // const service = new LoggingService();
     // service.logStatusChange(accountStatus);
     // console.log('A server status changed, new status: ' + accountStatus);
+
   }
 }
